@@ -1,0 +1,92 @@
+server:
+  port: 9100
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 100
+      min-spare: 10
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+log:
+  level: INFO
+  path: /less/logs
+
+# spring相关配置
+spring:
+  application:
+    name: less-blog
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mvc:
+    converters:
+      preferred-json-mapper: fastjson
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/sept?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  main:
+    allow-circular-references: true
+
+
+# 自动分页的配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: false
+  params: count=countSql
+
+# 存储session数据的Redis，所有服务均需要，因此放到公共配置中。
+# 根据实际情况，该Redis也可以用于存储其他数据。
+redis:
+  # redisson的配置。每个服务可以自己的配置文件中覆盖此选项。
+  redisson:
+    # 如果该值为false，系统将不会创建RedissionClient的bean。
+    enabled: true
+    # mode的可用值为，single/cluster/sentinel/master-slave
+    mode: single
+    # single: 单机模式
+    #   address: redis://localhost:6379
+    # cluster: 集群模式
+    #   每个节点逗号分隔，同时每个节点前必须以redis://开头。
+    #   address: redis://localhost:6379,redis://localhost:6378,...
+    # sentinel:
+    #   每个节点逗号分隔，同时每个节点前必须以redis://开头。
+    #   address: redis://localhost:6379,redis://localhost:6378,...
+    # master-slave:
+    #   每个节点逗号分隔，第一个为主节点，其余为从节点。同时每个节点前必须以redis://开头。
+    #   address: redis://localhost:6379,redis://localhost:6378,...
+    address: redis://localhost:6379
+    # 链接超时，单位毫秒。
+    timeout: 6000
+    # 单位毫秒。分布式锁的超时检测时长。
+    # 如果一次锁内操作超该毫秒数，或在释放锁之前异常退出，Redis会在该时长之后主动删除该锁使用的key。
+    lockWatchdogTimeout: 60000
+    # redis 密码，空可以不填。
+    password:
+    pool:
+      # 连接池数量。
+      poolSize: 20
+      # 连接池中最小空闲数量。
+      minIdle: 5
+
+# Logger Config
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.quickstart: debug
+
+mybatis-plus:
+  mapper-locations: classpath:fu/sen/blog/mapper/*Mapper.xml
+  global-config:
+    db-config:
+      logic-delete-value: -1
+      logic-not-delete-value: 1
+  type-aliases-package: fu.sen.blog.entity
