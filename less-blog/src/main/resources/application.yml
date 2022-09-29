@@ -12,7 +12,7 @@ server:
       enabled: true
 
 log:
-  level: INFO
+  level: DEBUG
   path: /less/logs
 
 # spring相关配置
@@ -30,7 +30,7 @@ spring:
       preferred-json-mapper: fastjson
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3307/sept?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/less-blog?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
   main:

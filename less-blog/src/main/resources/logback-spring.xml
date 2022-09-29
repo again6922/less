@@ -6,10 +6,10 @@
 	<springProperty scope="context" name="logPath" source="log.path"/>
 	<!-- 注意这里一定要放到springProfile里, 否则在你本机执行的时候还是会去找相应的文件 -->
 	<appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logPath}/flow.log</file>
+		<file>${logPath}/less.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
 			<!--日志文件输出的文件名-->
-			<fileNamePattern>${logPath}/back/%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<fileNamePattern>${logPath}/less-blog/%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 			<!--日志文件保留天数-->
 			<maxHistory>30</maxHistory>
 			<totalSizeCap>10GB</totalSizeCap>
